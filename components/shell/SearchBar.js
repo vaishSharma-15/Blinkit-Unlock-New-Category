@@ -247,10 +247,14 @@ export default function SearchBar({
 
         {nudge && !compact && (
           <Link
+            // Remounts the chip whenever it rotates to a different eligible
+            // category, so the pop + glow animation plays again each time —
+            // not just once on the very first render.
+            key={nudge.category}
             href={nudge.href}
             aria-label={nudge.label}
             title={nudge.label}
-            className="flex max-w-[42%] shrink-0 items-center gap-1 rounded-full bg-blinkit-green px-2.5 py-1.5 text-[11px] font-bold text-white"
+            className="nudge-chip flex max-w-[42%] shrink-0 items-center gap-1 rounded-full bg-blinkit-green px-2.5 py-1.5 text-[11px] font-bold text-white"
           >
             <Sparkle />
             <span className="truncate">{nudge.short}</span>
