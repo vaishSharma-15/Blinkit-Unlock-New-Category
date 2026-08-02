@@ -8,6 +8,9 @@ import { writeCookie } from "@/lib/clientCookie";
 import { isMAC } from "@/lib/eligibility";
 import { FREQUENT_COOKIE, PURCHASED_COOKIE, SEARCHED_COOKIE } from "@/lib/demoSession";
 
+/** Only shown until it's been dismissed once — see `dismissHint` below. */
+const HINT_DISMISSED_KEY = "demoProfileHintDismissed";
+
 /**
  * Demo-only control for switching which sample customer you're viewing as —
  * folded into the header's own "Account" circle rather than a permanent bar
@@ -19,11 +22,33 @@ import { FREQUENT_COOKIE, PURCHASED_COOKIE, SEARCHED_COOKIE } from "@/lib/demoSe
  * simulated note, reset the demo session — lives in the panel this opens.
  * The "Demo" label and the simulated-data note move here too, so the one
  * place this control lives still can't be mistaken for a real account menu.
+ *
+ * The callout bubble exists purely so a first-time viewer (a mentor sitting
+ * through a walkthrough, say) notices the circle does something before they'd
+ * otherwise stumble onto it — not a permanent piece of UI. It disappears the
+ * moment the panel is opened once, and stays gone for the rest of the
+ * session (sessionStorage, not state), so it doesn't reappear on every page
+ * navigation and nag someone who already found it.
  */
 export default function ProfileSwitcher({ current }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const ref = useRef(null);
+
+  useEffect(() => {
+    // Deferred a tick, same reasoning as UnlockCard's fetch-on-mount: the
+    // lint rule flags a setState call made synchronously in an effect body
+    // (the cascading-render pattern), not one following an async completion.
+    Promise.resolve().then(() => {
+      setShowHint(sessionStorage.getItem(HINT_DISMISSED_KEY) !== "1");
+    });
+  }, []);
+
+  function dismissHint() {
+    sessionStorage.setItem(HINT_DISMISSED_KEY, "1");
+    setShowHint(false);
+  }
 
   useEffect(() => {
     if (!open) return;
@@ -70,7 +95,10 @@ export default function ProfileSwitcher({ current }) {
         aria-label="Switch demo customer"
         aria-haspopup="true"
         aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => {
+          setOpen((v) => !v);
+          dismissHint();
+        }}
         className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[14px] font-bold text-blinkit-green"
       >
         {initial}
@@ -78,6 +106,22 @@ export default function ProfileSwitcher({ current }) {
           Demo
         </span>
       </button>
+
+      {showHint && !open && (
+        <div className="absolute top-12 right-0 z-30 w-48 rounded-lg border border-[#e0cd80] bg-[#fffbe6] p-2 text-left shadow-lg">
+          <span className="absolute -top-1.5 right-3 h-3 w-3 rotate-45 border-t border-l border-[#e0cd80] bg-[#fffbe6]" />
+          <p className="text-[10.5px] leading-snug text-[#7a6414]">
+            Tap to switch customer — each one shows different real behaviour.
+          </p>
+          <button
+            type="button"
+            onClick={dismissHint}
+            className="mt-1 text-[10px] font-semibold text-[#7a6414] underline"
+          >
+            Got it
+          </button>
+        </div>
+      )}
 
       {open && (
         <div className="absolute top-12 right-0 z-30 w-72 max-w-[85vw] rounded-xl border border-border bg-white p-2.5 text-left shadow-lg">

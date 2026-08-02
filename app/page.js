@@ -6,6 +6,7 @@ import ProductRail from "@/components/shell/ProductRail";
 import PromoGrid from "@/components/shell/PromoGrid";
 import SearchBar from "@/components/shell/SearchBar";
 import NewToExplore from "@/components/unlock/NewToExplore";
+import StillCuriousRow from "@/components/unlock/StillCuriousRow";
 import catalogue from "@/data/products.json";
 import { rankPopularCategories } from "@/lib/categoryPopularity";
 import { currentDemoCustomer } from "@/lib/demoCustomer";
@@ -36,6 +37,12 @@ export default async function Home() {
     ? rankPopularCategories(catalogue.categories, catalogue.products)
     : [];
 
+  // Every eligible category, for the home page's own "Still curious about"
+  // row — unlike the category page's version, nothing here is excluded as
+  // "the one already featured," since Home doesn't feature any single one.
+  const bySlug = new Map(catalogue.categories.map((c) => [c.slug, c]));
+  const eligibleCategories = eligible.map((e) => bySlug.get(e.category));
+
   return (
     <div className="flex w-full flex-1 flex-col bg-white">
       {/* One continuous yellow block: header, search, tab strip, campaign —
@@ -57,6 +64,10 @@ export default async function Home() {
       <main className="flex-1 pb-24">
         {showNewToExplore && (
           <NewToExplore categories={popularCategories} customerId={customer.id} />
+        )}
+
+        {eligibleCategories.length > 0 && (
+          <StillCuriousRow categories={eligibleCategories} />
         )}
 
         <PromoGrid categories={catalogue.categories} />
