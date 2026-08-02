@@ -8,9 +8,6 @@ import { writeCookie } from "@/lib/clientCookie";
 import { isMAC } from "@/lib/eligibility";
 import { FREQUENT_COOKIE, PURCHASED_COOKIE, SEARCHED_COOKIE } from "@/lib/demoSession";
 
-/** Only shown until it's been dismissed once — see `dismissHint` below. */
-const HINT_DISMISSED_KEY = "demoProfileHintDismissed";
-
 /**
  * Demo-only control for switching which sample customer you're viewing as —
  * folded into the header's own "Account" circle rather than a permanent bar
@@ -24,31 +21,19 @@ const HINT_DISMISSED_KEY = "demoProfileHintDismissed";
  * place this control lives still can't be mistaken for a real account menu.
  *
  * The callout bubble exists purely so a first-time viewer (a mentor sitting
- * through a walkthrough, say) notices the circle does something before they'd
- * otherwise stumble onto it — not a permanent piece of UI. It disappears the
- * moment the panel is opened once, and stays gone for the rest of the
- * session (sessionStorage, not state), so it doesn't reappear on every page
- * navigation and nag someone who already found it.
+ * through a walkthrough, say) notices the circle does something before
+ * they'd otherwise stumble onto it. Deliberately *not* persisted anywhere —
+ * it hides while the panel is open, or once dismissed for this page view,
+ * but a refresh or a fresh navigation brings it back. A demo aid that can
+ * permanently vanish after one click is a liability: the one time it needs
+ * to be on screen is whenever whoever's watching does the thing that makes
+ * them look at that spot again.
  */
 export default function ProfileSwitcher({ current }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [showHint, setShowHint] = useState(false);
+  const [hintDismissed, setHintDismissed] = useState(false);
   const ref = useRef(null);
-
-  useEffect(() => {
-    // Deferred a tick, same reasoning as UnlockCard's fetch-on-mount: the
-    // lint rule flags a setState call made synchronously in an effect body
-    // (the cascading-render pattern), not one following an async completion.
-    Promise.resolve().then(() => {
-      setShowHint(sessionStorage.getItem(HINT_DISMISSED_KEY) !== "1");
-    });
-  }, []);
-
-  function dismissHint() {
-    sessionStorage.setItem(HINT_DISMISSED_KEY, "1");
-    setShowHint(false);
-  }
 
   useEffect(() => {
     if (!open) return;
@@ -97,7 +82,7 @@ export default function ProfileSwitcher({ current }) {
         aria-expanded={open}
         onClick={() => {
           setOpen((v) => !v);
-          dismissHint();
+          setHintDismissed(true);
         }}
         className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[14px] font-bold text-blinkit-green"
       >
@@ -107,7 +92,7 @@ export default function ProfileSwitcher({ current }) {
         </span>
       </button>
 
-      {showHint && !open && (
+      {!hintDismissed && !open && (
         <div className="absolute top-12 right-0 z-30 w-48 rounded-lg border border-[#e0cd80] bg-[#fffbe6] p-2 text-left shadow-lg">
           <span className="absolute -top-1.5 right-3 h-3 w-3 rotate-45 border-t border-l border-[#e0cd80] bg-[#fffbe6]" />
           <p className="text-[10.5px] leading-snug text-[#7a6414]">
@@ -115,7 +100,7 @@ export default function ProfileSwitcher({ current }) {
           </p>
           <button
             type="button"
-            onClick={dismissHint}
+            onClick={() => setHintDismissed(true)}
             className="mt-1 text-[10px] font-semibold text-[#7a6414] underline"
           >
             Got it
