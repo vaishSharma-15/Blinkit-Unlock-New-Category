@@ -36,6 +36,7 @@ const DB_FOR_CATEGORY = {
   kitchenware: "world.openproductsfacts.org",
   pharmacy: "world.openproductsfacts.org",
   garden: "world.openproductsfacts.org",
+  electronics: "world.openproductsfacts.org",
 };
 
 // Brand + product line only. Full catalogue names are too specific to match.
@@ -62,6 +63,7 @@ const QUERY = {
   "gro-008": "madhur sugar",
   "gro-011": "tata sampann toor dal",
   "gro-012": "tata tea gold",
+  "ele-003": "portronics cable",
 };
 
 /**
@@ -77,6 +79,16 @@ const QUERY = {
  */
 const STRUCTURALLY_UNFINDABLE = new Set(["gro-001", "gro-009", "gro-010", "gdn-001"]);
 
+/**
+ * Different reason than STRUCTURALLY_UNFINDABLE above, same honest outcome:
+ * these do have barcodes, but multiple query attempts (brand name, model
+ * name, generic category term) all returned zero results — this database's
+ * electronics coverage is genuinely thin, not a matching problem. Re-running
+ * won't fix it; these stay on the category-icon fallback until (if ever)
+ * someone else contributes a real entry for them upstream.
+ */
+const NOT_YET_IN_DATABASE = new Set(["ele-001", "ele-002"]);
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const catalogue = JSON.parse(await fs.readFile(CATALOGUE, "utf8"));
@@ -90,7 +102,12 @@ let fetched = 0;
 let missing = 0;
 
 for (const product of catalogue.products) {
-  if (existing.has(product.id) || STRUCTURALLY_UNFINDABLE.has(product.id)) continue;
+  if (
+    existing.has(product.id) ||
+    STRUCTURALLY_UNFINDABLE.has(product.id) ||
+    NOT_YET_IN_DATABASE.has(product.id)
+  )
+    continue;
 
   const db = DB_FOR_CATEGORY[product.category];
   const q = (QUERY[product.id] ?? product.name).trim().replace(/\s+/g, "+");
