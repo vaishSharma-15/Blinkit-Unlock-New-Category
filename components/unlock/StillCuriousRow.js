@@ -19,6 +19,9 @@ export default function StillCuriousRow({ categories }) {
   return (
     <section className="mx-3 mt-2 rounded-xl border border-border bg-white p-3">
       <h3 className="text-[12px] font-bold">Still curious about</h3>
+      <p className="mt-0.5 text-[10.5px] text-muted">
+        Pick up right where you left off.
+      </p>
       <ul className="mt-2 flex flex-wrap gap-2">
         {categories.map((category) => (
           <li key={category.slug}>

@@ -1,3 +1,5 @@
+import ProfileSwitcher from "./ProfileSwitcher";
+
 /**
  * Blinkit's yellow header, matched to the live app.
  *
@@ -7,8 +9,12 @@
  *
  * The search bar and the tab strip sit under this inside the same yellow
  * block; they're separate components but share the background.
+ *
+ * The "Account" circle doubles as the demo customer switcher — see
+ * ProfileSwitcher — instead of a separate always-visible bar above the app
+ * chrome. `customerId` is passed through for that purpose only.
  */
-export default function Header({ customerName }) {
+export default function Header({ customerName, customerId }) {
   return (
     <header className="bg-blinkit-yellow px-4 pt-3 pb-1">
       <div className="flex items-start justify-between gap-3">
@@ -47,13 +53,7 @@ export default function Header({ customerName }) {
           >
             <WalletIcon />
           </button>
-          <button
-            type="button"
-            aria-label="Account"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-white"
-          >
-            <UserIcon />
-          </button>
+          <ProfileSwitcher current={customerId} />
         </div>
       </div>
     </header>
@@ -116,17 +116,3 @@ function WalletIcon() {
   );
 }
 
-function UserIcon() {
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="8" r="4" />
-      <path d="M4 21a8 8 0 0 1 16 0z" />
-    </svg>
-  );
-}

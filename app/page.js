@@ -1,7 +1,6 @@
 import BottomNav from "@/components/shell/BottomNav";
 import CategoryGrid from "@/components/shell/CategoryGrid";
 import CategoryTabs from "@/components/shell/CategoryTabs";
-import CustomerSelector from "@/components/shell/CustomerSelector";
 import Header from "@/components/shell/Header";
 import ProductRail from "@/components/shell/ProductRail";
 import PromoGrid from "@/components/shell/PromoGrid";
@@ -39,11 +38,11 @@ export default async function Home() {
 
   return (
     <div className="flex w-full flex-1 flex-col bg-white">
-      <CustomerSelector current={customer.id} />
-
       {/* One continuous yellow block: header, search, tab strip, campaign —
-          exactly the run the real app opens with. White starts below it. */}
-      <Header customerName={customer.name} />
+          exactly the run the real app opens with. White starts below it.
+          The demo customer switcher lives in the header's own Account
+          circle now — see ProfileSwitcher. */}
+      <Header customerName={customer.name} customerId={customer.id} />
       <SearchBar
         suggestions={GENERIC_SUGGESTIONS}
         nudges={nudges}
