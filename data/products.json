@@ -44,6 +44,11 @@
       "slug": "garden",
       "name": "Plants & Garden",
       "emoji": "🌱"
+    },
+    {
+      "slug": "electronics",
+      "name": "Electronics",
+      "emoji": "🎧"
     }
   ],
   "products": [
@@ -361,6 +366,33 @@
       "price": 199,
       "mrp": 249,
       "emoji": "🌱"
+    },
+    {
+      "id": "ele-001",
+      "name": "boAt Airdopes 141 Bluetooth Earbuds",
+      "category": "electronics",
+      "unit": "1 pair",
+      "price": 1299,
+      "mrp": 4490,
+      "emoji": "🎧"
+    },
+    {
+      "id": "ele-002",
+      "name": "Mi Power Bank 3i 20000mAh",
+      "category": "electronics",
+      "unit": "1 pc",
+      "price": 1899,
+      "mrp": 2299,
+      "emoji": "🔋"
+    },
+    {
+      "id": "ele-003",
+      "name": "Portronics Konnect Type-C Cable",
+      "category": "electronics",
+      "unit": "1.2 m",
+      "price": 249,
+      "mrp": 349,
+      "emoji": "🔌"
     }
   ]
 }

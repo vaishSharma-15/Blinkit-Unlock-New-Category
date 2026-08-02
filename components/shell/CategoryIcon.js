@@ -20,6 +20,7 @@ const ICONS = {
   kitchenware: KitchenwareIcon,
   pharmacy: PharmacyIcon,
   garden: GardenIcon,
+  electronics: ElectronicsIcon,
 };
 
 export default function CategoryIcon({ slug, size = 22, className = "" }) {
@@ -163,6 +164,18 @@ function GardenIcon({ size, className }) {
       <path d="M12 20V11" />
       <path d="M12 11C12 7 9 6 6 6c0 3.5 2.5 5.5 6 5.5z" fill="currentColor" stroke="none" />
       <path d="M12 11c0-3.5 2.5-5 5.5-5 0 3.2-2 5-5.5 5z" fill="currentColor" stroke="none" />
+    </>,
+  );
+}
+
+function ElectronicsIcon({ size, className }) {
+  return shell(
+    size,
+    className,
+    <>
+      <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
+      <rect x="2.5" y="14" width="4.5" height="6" rx="2" />
+      <rect x="17" y="14" width="4.5" height="6" rx="2" />
     </>,
   );
 }

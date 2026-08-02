@@ -159,6 +159,30 @@ export const sampleOrderStats = {
     returns: 14, // high returns — live plants are fragile in transit
     returnReasons: { "plant arrived wilted": 9, "wrong plant sent": 5 },
   },
+
+  // — Electronics ———————————————————————————————————————————
+  // The category named directly in this project's own research (docs/
+  // ProblemStatement.md: "a user who skipped buying earbuds on Blinkit,
+  // trusts Flipkart more in terms of quality") — the exact trust gap this
+  // whole feature exists to close.
+  "ele-001": {
+    orders: 421,
+    reorders: 134, // healthy reorder for an accessory, not a consumable
+    returns: 9,
+    returnReasons: { "one earbud not pairing": 5, "damaged packaging": 4 },
+  },
+  "ele-002": {
+    orders: 208,
+    reorders: 52,
+    returns: 13,
+    returnReasons: { "charges slower than advertised": 8, "damaged packaging": 5 },
+  },
+  "ele-003": {
+    orders: 42, // below threshold — card must not render
+    reorders: 9,
+    returns: 2,
+    returnReasons: { "damaged packaging": 2 },
+  },
 };
 
 /** Minimum orders before the numbers mean anything. Below this, no card. */

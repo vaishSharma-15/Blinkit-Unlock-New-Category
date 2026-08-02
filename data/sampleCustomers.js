@@ -64,6 +64,15 @@ export const sampleCustomers = [
     ],
     purchased: ["grocery", "stationery"],
   },
+  {
+    id: "c6",
+    name: "Karan",
+    label: "Interested in electronics",
+    note: "Searched earbuds a few times, never bought outside groceries.",
+    lastOrderDaysAgo: 3,
+    engaged: [{ category: "electronics", daysAgo: 2, type: "search" }],
+    purchased: ["grocery", "household"],
+  },
 ];
 
 export const DEFAULT_CUSTOMER_ID = "c2";
