@@ -82,12 +82,14 @@ const STRUCTURALLY_UNFINDABLE = new Set(["gro-001", "gro-009", "gro-010", "gdn-0
 /**
  * Different reason than STRUCTURALLY_UNFINDABLE above, same honest outcome:
  * these do have barcodes, but multiple query attempts (brand name, model
- * name, generic category term) all returned zero results — this database's
- * electronics coverage is genuinely thin, not a matching problem. Re-running
- * won't fix it; these stay on the category-icon fallback until (if ever)
- * someone else contributes a real entry for them upstream.
+ * name, generic category term) all returned zero results across both Open
+ * Products Facts and Wikimedia Commons — this database's electronics
+ * coverage is genuinely thin, not a matching problem. ele-001 and ele-002
+ * were resolved manually with photos supplied directly (see
+ * public/products/ele-001.jpg and ele-002.jpg) rather than fetched by this
+ * script, so this set is currently empty.
  */
-const NOT_YET_IN_DATABASE = new Set(["ele-001", "ele-002"]);
+const NOT_YET_IN_DATABASE = new Set([]);
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
