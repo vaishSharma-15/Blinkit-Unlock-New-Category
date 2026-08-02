@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/*
+ * Blinkit's real app is light-only, so we don't ship a dark variant here —
+ * the Phase 1 shell needs one consistent palette to match against.
+ */
+:root {
+  --background: #ffffff;
+  --foreground: #1f1f1f;
+
+  /* Blinkit brand palette, used from Phase 1 onward */
+  --blinkit-yellow: #f8cb46;
+  --blinkit-green: #0c831f;
+  --muted: #7e808c;
+  --border: #e9e9eb;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-blinkit-yellow: var(--blinkit-yellow);
+  --color-blinkit-green: var(--blinkit-green);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-app-sans);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}

@@ -1,0 +1,366 @@
+{
+  "categories": [
+    {
+      "slug": "grocery",
+      "name": "Grocery",
+      "emoji": "🥬"
+    },
+    {
+      "slug": "snacks",
+      "name": "Snacks",
+      "emoji": "🍪"
+    },
+    {
+      "slug": "household",
+      "name": "Household",
+      "emoji": "🧴"
+    },
+    {
+      "slug": "pet-care",
+      "name": "Pet Care",
+      "emoji": "🐾"
+    },
+    {
+      "slug": "skincare",
+      "name": "Skincare",
+      "emoji": "🧖"
+    },
+    {
+      "slug": "stationery",
+      "name": "Stationery",
+      "emoji": "✏️"
+    },
+    {
+      "slug": "kitchenware",
+      "name": "Kitchenware",
+      "emoji": "🔪"
+    },
+    {
+      "slug": "pharmacy",
+      "name": "Pharmacy",
+      "emoji": "💊"
+    },
+    {
+      "slug": "garden",
+      "name": "Plants & Garden",
+      "emoji": "🌱"
+    }
+  ],
+  "products": [
+    {
+      "id": "gro-001",
+      "name": "Fresh Tomato (Tamatar)",
+      "category": "grocery",
+      "unit": "500 g",
+      "price": 24,
+      "mrp": 32,
+      "emoji": "🍅"
+    },
+    {
+      "id": "gro-002",
+      "name": "Amul Taaza Toned Milk",
+      "category": "grocery",
+      "unit": "500 ml",
+      "price": 28,
+      "mrp": 28,
+      "emoji": "🥛"
+    },
+    {
+      "id": "gro-003",
+      "name": "Aashirvaad Superior MP Atta",
+      "category": "grocery",
+      "unit": "5 kg",
+      "price": 265,
+      "mrp": 310,
+      "emoji": "🌾"
+    },
+    {
+      "id": "gro-004",
+      "name": "Fortune Sunlite Refined Sunflower Oil",
+      "category": "grocery",
+      "unit": "1 L",
+      "price": 148,
+      "mrp": 175,
+      "emoji": "🫗"
+    },
+    {
+      "id": "gro-005",
+      "name": "Whole Wheat Brown Bread",
+      "category": "grocery",
+      "unit": "400 g",
+      "price": 45,
+      "mrp": 50,
+      "emoji": "🍞"
+    },
+    {
+      "id": "gro-006",
+      "name": "India Gate Basmati Rice Classic",
+      "category": "grocery",
+      "unit": "1 kg",
+      "price": 145,
+      "mrp": 165,
+      "emoji": "🍚"
+    },
+    {
+      "id": "gro-007",
+      "name": "Tata Salt Iodized",
+      "category": "grocery",
+      "unit": "1 kg",
+      "price": 28,
+      "mrp": 28,
+      "emoji": "🧂"
+    },
+    {
+      "id": "gro-008",
+      "name": "Madhur Pure Sugar",
+      "category": "grocery",
+      "unit": "1 kg",
+      "price": 55,
+      "mrp": 60,
+      "emoji": "🍬"
+    },
+    {
+      "id": "gro-009",
+      "name": "Fresh Onion (Pyaz)",
+      "category": "grocery",
+      "unit": "1 kg",
+      "price": 35,
+      "mrp": 40,
+      "emoji": "🧅"
+    },
+    {
+      "id": "gro-010",
+      "name": "Fresh Potato (Aloo)",
+      "category": "grocery",
+      "unit": "1 kg",
+      "price": 30,
+      "mrp": 35,
+      "emoji": "🥔"
+    },
+    {
+      "id": "gro-011",
+      "name": "Tata Sampann Toor Dal",
+      "category": "grocery",
+      "unit": "1 kg",
+      "price": 165,
+      "mrp": 185,
+      "emoji": "🫘"
+    },
+    {
+      "id": "gro-012",
+      "name": "Tata Tea Gold",
+      "category": "grocery",
+      "unit": "250 g",
+      "price": 140,
+      "mrp": 155,
+      "emoji": "🍵"
+    },
+    {
+      "id": "sna-001",
+      "name": "Lay's India's Magic Masala Chips",
+      "category": "snacks",
+      "unit": "52 g",
+      "price": 20,
+      "mrp": 20,
+      "emoji": "🥔"
+    },
+    {
+      "id": "sna-002",
+      "name": "Parle-G Original Glucose Biscuits",
+      "category": "snacks",
+      "unit": "800 g",
+      "price": 85,
+      "mrp": 95,
+      "emoji": "🍪"
+    },
+    {
+      "id": "sna-003",
+      "name": "Haldiram's Aloo Bhujia",
+      "category": "snacks",
+      "unit": "200 g",
+      "price": 52,
+      "mrp": 60,
+      "emoji": "🥨"
+    },
+    {
+      "id": "sna-004",
+      "name": "Dairy Milk Silk Chocolate Bar",
+      "category": "snacks",
+      "unit": "150 g",
+      "price": 175,
+      "mrp": 190,
+      "emoji": "🍫"
+    },
+    {
+      "id": "hou-001",
+      "name": "Surf Excel Matic Front Load Liquid",
+      "category": "household",
+      "unit": "2 L",
+      "price": 476,
+      "mrp": 570,
+      "emoji": "🧺"
+    },
+    {
+      "id": "hou-002",
+      "name": "Vim Dishwash Gel Lemon",
+      "category": "household",
+      "unit": "750 ml",
+      "price": 149,
+      "mrp": 180,
+      "emoji": "🍋"
+    },
+    {
+      "id": "hou-003",
+      "name": "Harpic Power Plus 10x Max Clean",
+      "category": "household",
+      "unit": "1 L",
+      "price": 192,
+      "mrp": 225,
+      "emoji": "🚿"
+    },
+    {
+      "id": "hou-004",
+      "name": "Good Knight Gold Flash Refill",
+      "category": "household",
+      "unit": "45 ml",
+      "price": 78,
+      "mrp": 92,
+      "emoji": "🦟"
+    },
+    {
+      "id": "pet-001",
+      "name": "Pedigree Puppy Dry Dog Food Chicken & Milk",
+      "category": "pet-care",
+      "unit": "2.8 kg",
+      "price": 899,
+      "mrp": 1075,
+      "emoji": "🦴"
+    },
+    {
+      "id": "pet-002",
+      "name": "Drools Adult Dog Food Chicken & Egg",
+      "category": "pet-care",
+      "unit": "1.2 kg",
+      "price": 349,
+      "mrp": 420,
+      "emoji": "🐕"
+    },
+    {
+      "id": "pet-003",
+      "name": "Whiskas Junior Ocean Fish Cat Food",
+      "category": "pet-care",
+      "unit": "450 g",
+      "price": 235,
+      "mrp": 280,
+      "emoji": "🐈"
+    },
+    {
+      "id": "pet-004",
+      "name": "Himalaya Erina EP Pet Shampoo",
+      "category": "pet-care",
+      "unit": "200 ml",
+      "price": 190,
+      "mrp": 230,
+      "emoji": "🧼"
+    },
+    {
+      "id": "skn-001",
+      "name": "Minimalist Vitamin C 10% Face Serum",
+      "category": "skincare",
+      "unit": "30 ml",
+      "price": 599,
+      "mrp": 699,
+      "emoji": "🧴"
+    },
+    {
+      "id": "skn-002",
+      "name": "Cetaphil Gentle Skin Cleanser",
+      "category": "skincare",
+      "unit": "125 ml",
+      "price": 315,
+      "mrp": 375,
+      "emoji": "🫧"
+    },
+    {
+      "id": "skn-003",
+      "name": "Lakmé 9to5 Sun Expert Sunscreen Lotion",
+      "category": "skincare",
+      "unit": "50 ml",
+      "price": 249,
+      "mrp": 299,
+      "emoji": "☀️"
+    },
+    {
+      "id": "skn-004",
+      "name": "Nivea Soft Light Moisturiser",
+      "category": "skincare",
+      "unit": "100 ml",
+      "price": 199,
+      "mrp": 245,
+      "emoji": "💧"
+    },
+    {
+      "id": "stn-001",
+      "name": "Classmate Spiral Notebook Ruled",
+      "category": "stationery",
+      "unit": "160 pages",
+      "price": 95,
+      "mrp": 120,
+      "emoji": "📓"
+    },
+    {
+      "id": "stn-002",
+      "name": "Cello Butterflow Ball Pen Blue",
+      "category": "stationery",
+      "unit": "Pack of 5",
+      "price": 50,
+      "mrp": 50,
+      "emoji": "🖊️"
+    },
+    {
+      "id": "stn-003",
+      "name": "Faber-Castell Colour Pencils",
+      "category": "stationery",
+      "unit": "24 shades",
+      "price": 215,
+      "mrp": 260,
+      "emoji": "🖍️"
+    },
+    {
+      "id": "stn-004",
+      "name": "Fevicol MR Adhesive Tube",
+      "category": "stationery",
+      "unit": "22.5 g",
+      "price": 30,
+      "mrp": 35,
+      "emoji": "🩹"
+    },
+    {
+      "id": "kit-001",
+      "name": "Pigeon Stainless Steel Kitchen Knife",
+      "category": "kitchenware",
+      "unit": "1 pc",
+      "price": 149,
+      "mrp": 199,
+      "emoji": "🔪"
+    },
+    {
+      "id": "pha-001",
+      "name": "Johnson & Johnson Band-Aid Flexible Fabric",
+      "category": "pharmacy",
+      "unit": "20 strips",
+      "price": 55,
+      "mrp": 65,
+      "emoji": "💊"
+    },
+    {
+      "id": "gdn-001",
+      "name": "Ugaoo Money Plant (Live)",
+      "category": "garden",
+      "unit": "1 plant",
+      "price": 199,
+      "mrp": 249,
+      "emoji": "🌱"
+    }
+  ]
+}
