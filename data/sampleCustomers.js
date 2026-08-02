@@ -25,11 +25,11 @@ export const sampleCustomers = [
     id: "c2",
     name: "Arjun",
     label: "Interested in 3 new categories",
-    note: "Searched pet care and stationery, browsed skincare — three new categories.",
+    note: "Searched pet care and stationery, browsed electronics — three new categories.",
     lastOrderDaysAgo: 2,
     engaged: [
       { category: "pet-care", daysAgo: 1, type: "search" },
-      { category: "skincare", daysAgo: 1, type: "browse" },
+      { category: "electronics", daysAgo: 1, type: "browse" },
       { category: "stationery", daysAgo: 2, type: "search" },
     ],
     purchased: ["grocery"],
@@ -63,15 +63,6 @@ export const sampleCustomers = [
       { category: "stationery", daysAgo: 4, type: "search" },
     ],
     purchased: ["grocery", "stationery"],
-  },
-  {
-    id: "c6",
-    name: "Karan",
-    label: "Interested in electronics",
-    note: "Searched earbuds a few times, never bought outside groceries.",
-    lastOrderDaysAgo: 3,
-    engaged: [{ category: "electronics", daysAgo: 2, type: "search" }],
-    purchased: ["grocery", "household"],
   },
 ];
 
