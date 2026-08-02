@@ -231,7 +231,7 @@ export default function UnlockCard({ product, onStatusChange, footer }) {
                 <Stat key={reason} label={reason} value={n} muted />
               ))}
             </dl>
-            <p className="mt-1.5 text-[9px] text-muted">
+            <p className="mt-1.5 text-[10px] text-muted">
               Order figures are illustrative sample data · summary generated
               live at {new Date(state.generatedAt).toLocaleTimeString()}
               {state.cached ? " (cached, hit Regenerate for a fresh call)" : ""}
@@ -313,7 +313,7 @@ function Stat({ label, value, muted, good }) {
             : "bg-[#f7f7f8] text-foreground"
       }`}
     >
-      <dt className="inline opacity-70">{label}: </dt>
+      <dt className="inline">{label}: </dt>
       <dd className="inline font-bold">{value}</dd>
     </div>
   );

@@ -76,7 +76,7 @@ export default function AskBox({ productId }) {
               <ul className="mt-1 space-y-1">
                 {state.sources.map((s, i) => (
                   <li key={i} className="text-[10px] leading-snug text-muted">
-                    “{s.text}…” <span className="opacity-70">({s.rating}★)</span>
+                    “{s.text}…” <span>({s.rating}★)</span>
                   </li>
                 ))}
               </ul>

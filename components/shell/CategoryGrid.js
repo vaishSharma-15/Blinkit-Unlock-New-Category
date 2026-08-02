@@ -50,8 +50,8 @@ export default function CategoryGrid({ categories, frequent = [] }) {
               >
                 <CategoryIcon slug={category.slug} size={26} />
                 {category.pinned && (
-                  <span className="absolute -top-1 -right-1 rounded-full bg-blinkit-green px-1.5 py-0.5 text-[8px] font-bold text-white">
-                    Yours
+                  <span className="absolute inset-x-0 top-0 rounded-t-xl bg-blinkit-green px-1 py-0.5 text-center text-[7px] leading-tight font-bold text-white">
+                    New Category Explored
                   </span>
                 )}
               </span>

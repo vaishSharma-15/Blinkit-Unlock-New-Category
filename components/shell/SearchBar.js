@@ -84,7 +84,6 @@ export default function SearchBar({
   const [nudgeIndex, setNudgeIndex] = useState(0);
   const [value, setValue] = useState("");
   const [debounced, setDebounced] = useState("");
-  const [submittedNoMatch, setSubmittedNoMatch] = useState(false);
 
   useEffect(() => {
     if (items.length <= 1) return;
@@ -192,11 +191,11 @@ export default function SearchBar({
     if (destination) {
       recordSearch(destination.match.categorySlug);
       router.push(destination.href);
-    } else {
-      // Honest, not silent: a query that matches nothing gets said out loud
-      // rather than a form that quietly swallows the Enter key.
-      setSubmittedNoMatch(true);
     }
+    // No destination: the "we don't have that" message below is already
+    // live off `debounced` (see its render condition), so Enter needs no
+    // separate handling here — it doesn't need to wait for a submit to say
+    // so, the same way it doesn't need to wait to navigate on a real match.
   }
 
   const nudge = nudges[nudgeIndex % (nudges.length || 1)];
@@ -223,15 +222,7 @@ export default function SearchBar({
           <input
             type="text"
             value={value}
-            onChange={(e) => {
-              setValue(e.target.value);
-              // Retires the "we don't have that" message from a previous
-              // Enter press — it was an answer to the old query, not this
-              // one. Cleared here, in the event handler, rather than an
-              // effect keyed on `value` — this is the actual user action
-              // that invalidates it, not a derived reaction to it.
-              setSubmittedNoMatch(false);
-            }}
+            onChange={(e) => setValue(e.target.value)}
             aria-label="Search for products"
             enterKeyHint="search"
             className={`w-full bg-transparent font-medium outline-none placeholder:text-transparent ${
@@ -335,11 +326,13 @@ export default function SearchBar({
         </Link>
       )}
 
-      {/* Enter was pressed and nothing matched. Said plainly rather than
-          left silent — see the note on handleSubmit. */}
-      {!live && submittedNoMatch && (
+      {/* Live off the debounced value, same as the two match panels above —
+          shows as soon as typing settles on something that matches nothing,
+          not only after Enter is pressed. Enter still works as a shortcut
+          to the same honest answer, it just no longer gates it. */}
+      {!live && debounced.trim().length > 0 && (
         <p className="mt-2 rounded-xl border border-border bg-white px-3 py-2.5 text-[11.5px] text-muted">
-          We don&apos;t have a demo category for &ldquo;{value.trim()}&rdquo; yet — nothing
+          We don&apos;t have a demo category for &ldquo;{debounced.trim()}&rdquo; yet — nothing
           invented to fill the gap. Try Pet Care or Skincare for the full
           experience.
         </p>
