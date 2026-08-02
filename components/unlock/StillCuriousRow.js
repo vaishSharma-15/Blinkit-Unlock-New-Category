@@ -27,22 +27,26 @@ export default function StillCuriousRow({ categories }) {
     <section
       aria-label="Still curious about — pick up right where you left off"
       title="From what you searched for yourself — nothing borrowed from anyone else's history."
-      className="mx-3 mt-2 flex items-center gap-1.5 overflow-x-auto rounded-full border border-blinkit-green/25 bg-gradient-to-r from-blinkit-green/12 via-blinkit-green/5 to-transparent py-1.5 pr-3 pl-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      className="mx-3 mt-2 overflow-x-auto rounded-2xl border border-blinkit-green/15 bg-gradient-to-r from-blinkit-green/10 to-blinkit-yellow/10 p-1.5 shadow-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
     >
-      <span className="flex shrink-0 items-center gap-1 rounded-full bg-blinkit-green px-2.5 py-1 text-[10.5px] font-bold whitespace-nowrap text-white">
-        <SparkleIcon />
-        Still curious
-      </span>
-      {categories.map((category) => (
-        <Link
-          key={category.slug}
-          href={`/category/${category.slug}`}
-          className="flex shrink-0 items-center gap-1 rounded-full bg-white px-2.5 py-1 text-[11.5px] font-semibold whitespace-nowrap text-blinkit-green shadow-sm"
-        >
-          <CategoryIcon slug={category.slug} size={13} />
-          {category.name}
-        </Link>
-      ))}
+      <div className="flex items-center gap-2">
+        <span className="flex shrink-0 items-center gap-1 rounded-xl bg-blinkit-green px-2.5 py-2 text-[10.5px] font-bold whitespace-nowrap text-white shadow-sm">
+          <SparkleIcon />
+          Still curious
+        </span>
+        {categories.map((category) => (
+          <Link
+            key={category.slug}
+            href={`/category/${category.slug}`}
+            className="flex shrink-0 items-center gap-1.5 rounded-xl bg-white py-1.5 pr-3 pl-1.5 text-[11.5px] font-bold whitespace-nowrap text-foreground shadow-sm ring-1 ring-blinkit-green/10 transition-transform active:scale-95"
+          >
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-blinkit-green/10 text-blinkit-green">
+              <CategoryIcon slug={category.slug} size={14} />
+            </span>
+            {category.name}
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }
@@ -50,8 +54,8 @@ export default function StillCuriousRow({ categories }) {
 function SparkleIcon() {
   return (
     <svg
-      width="10"
-      height="10"
+      width="11"
+      height="11"
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden="true"
