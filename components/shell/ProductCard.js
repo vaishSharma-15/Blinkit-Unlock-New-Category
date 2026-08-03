@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { ProductPhotoFallback } from "./CategoryIcon";
 
@@ -16,19 +19,23 @@ import { ProductPhotoFallback } from "./CategoryIcon";
  * Unlock card (`?p=<id>`, the same query param the search bar already uses to
  * feature a specific product) — so a customer browsing the grid can open any
  * product's real summary and ask box, not only whichever one a search
- * happened to land on. The ADD button stays outside the link: it's a
- * different action (add to cart, not navigate), and nesting it inside would
- * make the whole row invalid, ambiguously-clickable markup.
+ * happened to land on. The ADD button stays outside that <Link> to keep the
+ * row valid markup (a button nested in an anchor is invalid), but this is a
+ * demo of the Unlock flow, not a real cart — so ADD takes you to the same
+ * Unlock card via router.push rather than silently adding to a cart nothing
+ * else in the app reads.
  */
 export default function ProductCard({ product }) {
+  const router = useRouter();
   const discount = product.mrp > product.price;
   const percentOff = discount
     ? Math.round(((product.mrp - product.price) / product.mrp) * 100)
     : 0;
+  const href = `/category/${product.category}?p=${product.id}`;
 
   return (
     <article className="flex h-full flex-col rounded-xl border border-border bg-white p-2">
-      <Link href={`/category/${product.category}?p=${product.id}`}>
+      <Link href={href}>
         <div className="relative mb-2 flex aspect-square items-center justify-center overflow-hidden rounded-lg bg-[#f7f7f8]">
           {product.image ? (
             <Image
@@ -68,6 +75,7 @@ export default function ProductCard({ product }) {
         </div>
         <button
           type="button"
+          onClick={() => router.push(href)}
           className="shrink-0 rounded-lg border border-blinkit-green bg-blinkit-green/5 px-4 py-1.5 text-[12px] font-bold text-blinkit-green transition-colors hover:bg-blinkit-green/10"
         >
           ADD
