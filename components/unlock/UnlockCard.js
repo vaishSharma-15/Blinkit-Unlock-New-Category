@@ -162,6 +162,7 @@ export default function UnlockCard({ product, onStatusChange, footer }) {
             type="button"
             onClick={() => load(true)}
             disabled={regenerating}
+            title="Summaries are cached for a few minutes so repeat views don't burn API calls. Tap this for a fresh, live one instead of the cached version."
             className="flex shrink-0 items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 text-[10px] font-bold text-white disabled:opacity-50"
           >
             <RegenerateIcon spinning={regenerating} />
