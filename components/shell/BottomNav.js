@@ -6,16 +6,17 @@ import Link from "next/link";
  * filled rounded rectangle behind the icon, not an underline.
  *
  * Four tabs, in the app's order: Home, Order Again, Categories, Print. Order
- * Again and Print are both chrome, not real destinations in this demo — same
- * as the real app's tab bar, present and tappable, just not every tab needs
- * its own page for this to read as a real app shell.
+ * Again and Print are chrome only — styled identically to the real tabs, but
+ * with no destination, so tapping one does nothing rather than silently
+ * routing Home like a broken link would. Real app shells have tabs like
+ * this; not every one of them has to go anywhere for the bar to read as real.
  */
 export default function BottomNav({ active = "home" }) {
   const items = [
     { id: "home", label: "Home", href: "/", icon: HomeIcon },
-    { id: "reorder", label: "Order Again", href: "/", icon: BagIcon },
+    { id: "reorder", label: "Order Again", href: null, icon: BagIcon },
     { id: "categories", label: "Categories", href: "/categories", icon: DotsIcon },
-    { id: "print", label: "Print", href: "/", icon: PrintIcon },
+    { id: "print", label: "Print", href: null, icon: PrintIcon },
   ];
 
   return (
@@ -27,6 +28,38 @@ export default function BottomNav({ active = "home" }) {
         {items.map((item) => {
           const Icon = item.icon;
           const isActive = item.id === active;
+          const inner = (
+            <>
+              <span
+                className={`flex h-8 w-14 items-center justify-center rounded-full ${
+                  isActive ? "bg-[#f1f1f3]" : ""
+                }`}
+              >
+                <Icon />
+              </span>
+              <span
+                className={`text-[11px] leading-none ${
+                  isActive ? "font-bold" : "font-medium text-black/70"
+                }`}
+              >
+                {item.label}
+              </span>
+            </>
+          );
+
+          if (!item.href) {
+            return (
+              <li key={item.id} className="flex-1">
+                <button
+                  type="button"
+                  aria-disabled="true"
+                  className="flex w-full flex-col items-center gap-0.5"
+                >
+                  {inner}
+                </button>
+              </li>
+            );
+          }
 
           return (
             <li key={item.id} className="flex-1">
@@ -35,20 +68,7 @@ export default function BottomNav({ active = "home" }) {
                 aria-current={isActive ? "page" : undefined}
                 className="flex flex-col items-center gap-0.5"
               >
-                <span
-                  className={`flex h-8 w-14 items-center justify-center rounded-full ${
-                    isActive ? "bg-[#f1f1f3]" : ""
-                  }`}
-                >
-                  <Icon />
-                </span>
-                <span
-                  className={`text-[11px] leading-none ${
-                    isActive ? "font-bold" : "font-medium text-black/70"
-                  }`}
-                >
-                  {item.label}
-                </span>
+                {inner}
               </Link>
             </li>
           );
