@@ -72,18 +72,18 @@ export default async function Home() {
 
         <PromoGrid categories={catalogue.categories} />
 
-        <ProductRail
-          title="Frequently bought"
-          slug="grocery"
-          products={products.slice(0, 8)}
-        />
-
         <CategoryGrid
           categories={catalogue.categories}
           frequent={customer.frequent}
         />
 
-        {catalogue.categories.map((category) => (
+        {/* Only categories this customer is actually eligible for get a rail
+            on Home. Tapping any product here always lands on a real Unlock
+            card — no rail exists whose products open to a blank category
+            page, which is what showing every category (including ones with
+            no signal at all) used to do. Browsing everything else still
+            works via the category grid above or the full Categories tab. */}
+        {eligibleCategories.map((category) => (
           <ProductRail
             key={category.slug}
             title={category.name}
