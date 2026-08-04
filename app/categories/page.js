@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import AppFooterMark from "@/components/shell/AppFooterMark";
 import BottomNav from "@/components/shell/BottomNav";
 import CategoryGrid from "@/components/shell/CategoryGrid";
 import catalogue from "@/data/products.json";
@@ -31,6 +32,7 @@ export default async function CategoriesPage() {
           categories={catalogue.categories}
           frequent={customer.frequent}
         />
+        <AppFooterMark />
       </main>
 
       <BottomNav active="categories" />

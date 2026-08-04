@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import AppFooterMark from "@/components/shell/AppFooterMark";
 import BottomNav from "@/components/shell/BottomNav";
 import ProductGrid from "@/components/shell/ProductGrid";
 import UnlockSection from "@/components/unlock/UnlockSection";
@@ -101,6 +102,7 @@ export default async function CategoryPage({ params, searchParams }) {
           </>
         )}
         <ProductGrid products={products} />
+        <AppFooterMark />
       </main>
 
       <BottomNav active="categories" />
