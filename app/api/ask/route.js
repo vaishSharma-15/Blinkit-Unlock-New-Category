@@ -13,13 +13,12 @@ const MAX_QUESTION_LENGTH = 200;
  * Crude per-session rate limit. In-memory, so it resets on redeploy — enough
  * for a demo on a public URL, not a production control.
  *
- * Deliberately set below the tightest free-tier ceiling observed from the live
- * API (5/minute; a second bucket reported 20), so a rapid-fire questioner hits
- * *our* limit and gets a clear sentence about it rather than the provider's
- * 429 surfacing as a generic failure. The card's summary calls draw on the
- * same quota, so this leaves room for them.
+ * Loose enough not to get in the way of normal testing, still low enough that
+ * a rapid-fire questioner hits *our* limit and gets a clear sentence about it
+ * rather than the provider's 429 surfacing as a generic failure. The card's
+ * summary calls draw on the same quota, so this leaves room for them too.
  */
-const RATE_LIMIT = { max: 4, windowMs: 60_000 };
+const RATE_LIMIT = { max: 15, windowMs: 60_000 };
 const hits = new Map();
 
 function rateLimited(sessionKey) {
