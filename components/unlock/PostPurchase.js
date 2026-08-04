@@ -39,9 +39,9 @@ export default function PostPurchase({ customerId, category, remaining }) {
       </p>
 
       {added ? (
-        <p className="mt-2 rounded-lg bg-blinkit-green/5 px-2.5 py-2 text-[12px] text-blinkit-green">
-          {category.name} is now one of your categories. You&apos;ll see it
-          first on the home screen.
+        <p className="pin-pop mt-2 flex items-center gap-1.5 rounded-lg bg-blinkit-green/5 px-2.5 py-2 text-[12px] font-semibold text-blinkit-green">
+          <TickIcon />
+          {`${category.name} is now one of your categories. You'll see it first on the home screen.`}
         </p>
       ) : (
         <>

@@ -5,12 +5,15 @@ import Link from "next/link";
  * rather than a full-width bar welded to the bottom edge. The active tab is a
  * filled rounded rectangle behind the icon, not an underline.
  *
- * Four tabs, in the app's order: Home, Order Again, Categories, Print.
+ * Four tabs, in the app's order: Home, Order Again, Categories, Print. Order
+ * Again has nothing behind it in this demo — there's no order history to
+ * show — so it's rendered disabled rather than silently routing Home like a
+ * broken link would.
  */
 export default function BottomNav({ active = "home" }) {
   const items = [
     { id: "home", label: "Home", href: "/", icon: HomeIcon },
-    { id: "reorder", label: "Order Again", href: "/", icon: BagIcon },
+    { id: "reorder", label: "Order Again", href: null, icon: BagIcon },
     { id: "categories", label: "Categories", href: "/categories", icon: DotsIcon },
     { id: "print", label: "Print", href: "/", icon: PrintIcon },
   ];
@@ -24,6 +27,26 @@ export default function BottomNav({ active = "home" }) {
         {items.map((item) => {
           const Icon = item.icon;
           const isActive = item.id === active;
+
+          if (!item.href) {
+            return (
+              <li key={item.id} className="flex-1">
+                <span
+                  aria-disabled="true"
+                  title="Not part of this demo — there's no order history to show"
+                  className="flex cursor-not-allowed flex-col items-center gap-0.5 opacity-35"
+                >
+                  <span className="flex h-8 w-14 items-center justify-center rounded-full">
+                    <Icon />
+                  </span>
+                  <span className="text-[11px] leading-none font-medium">
+                    {item.label}
+                  </span>
+                </span>
+              </li>
+            );
+          }
+
           return (
             <li key={item.id} className="flex-1">
               <Link

@@ -5,6 +5,7 @@ import BottomNav from "@/components/shell/BottomNav";
 import CategoryGrid from "@/components/shell/CategoryGrid";
 import catalogue from "@/data/products.json";
 import { currentDemoCustomer } from "@/lib/demoCustomer";
+import { getEligible } from "@/lib/eligibility";
 
 /**
  * A real destination for the bottom nav's Categories tab, which previously
@@ -17,6 +18,11 @@ import { currentDemoCustomer } from "@/lib/demoCustomer";
  */
 export default async function CategoriesPage() {
   const customer = await currentDemoCustomer();
+  const eligibleSlugs = new Set(
+    getEligible(customer, {
+      availableCategories: catalogue.categories.map((c) => c.slug),
+    }).map((e) => e.category),
+  );
 
   return (
     <div className="flex w-full flex-1 flex-col bg-white">
@@ -31,6 +37,7 @@ export default async function CategoriesPage() {
         <CategoryGrid
           categories={catalogue.categories}
           frequent={customer.frequent}
+          eligibleSlugs={eligibleSlugs}
         />
         <AppFooterMark />
       </main>

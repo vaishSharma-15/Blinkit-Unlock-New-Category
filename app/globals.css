@@ -58,3 +58,25 @@ body {
     animation: none;
   }
 }
+
+/*
+ * The moment a category actually gets added to a customer's list — the
+ * post-purchase confirmation, and the pinned "New Category Explored" tag it
+ * produces back on the category grid — deserves the same "this just
+ * happened" pop the nudge chip gets, so both play it once on mount rather
+ * than looping. A tag that pulses forever would misreport the state as
+ * still-changing when it's already settled.
+ */
+@keyframes pin-pop {
+  0% { transform: scale(0.75); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.pin-pop {
+  animation: pin-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pin-pop {
+    animation: none;
+  }
+}

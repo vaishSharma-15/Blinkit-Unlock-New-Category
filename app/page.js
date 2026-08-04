@@ -43,6 +43,13 @@ export default async function Home() {
   // "the one already featured," since Home doesn't feature any single one.
   const bySlug = new Map(catalogue.categories.map((c) => [c.slug, c]));
   const eligibleCategories = eligible.map((e) => bySlug.get(e.category));
+  const eligibleSlugs = new Set(eligible.map((e) => e.category));
+
+  // A real "frequently bought" shelf — products from categories this
+  // customer has actually purchased, not an arbitrary slice of the catalogue.
+  const frequentlyBought = products
+    .filter((p) => customer.purchased.includes(p.category))
+    .slice(0, 8);
 
   return (
     <div className="flex w-full flex-1 flex-col bg-white">
@@ -73,23 +80,33 @@ export default async function Home() {
 
         <PromoGrid categories={catalogue.categories} />
 
+        {frequentlyBought.length > 0 && (
+          <ProductRail
+            title="Frequently bought"
+            slug={frequentlyBought[0].category}
+            products={frequentlyBought}
+            eligibleSlugs={eligibleSlugs}
+          />
+        )}
+
         <CategoryGrid
           categories={catalogue.categories}
           frequent={customer.frequent}
+          eligibleSlugs={eligibleSlugs}
         />
 
-        {/* Only categories this customer is actually eligible for get a rail
-            on Home. Tapping any product here always lands on a real Unlock
-            card — no rail exists whose products open to a blank category
-            page, which is what showing every category (including ones with
-            no signal at all) used to do. Browsing everything else still
-            works via the category grid above or the full Categories tab. */}
-        {eligibleCategories.map((category) => (
+        {/* Every category gets a rail here, same as the real app — nothing
+            is hidden. The small green sparkle on a product (see ProductCard)
+            is the one visual cue for which categories are actually eligible,
+            so a tap's outcome is predictable without stripping the page down
+            to only those categories. */}
+        {catalogue.categories.map((category) => (
           <ProductRail
             key={category.slug}
             title={category.name}
             slug={category.slug}
             products={products.filter((p) => p.category === category.slug)}
+            eligibleSlugs={eligibleSlugs}
           />
         ))}
 

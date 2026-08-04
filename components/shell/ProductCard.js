@@ -24,8 +24,15 @@ import { ProductPhotoFallback } from "./CategoryIcon";
  * demo of the Unlock flow, not a real cart — so ADD takes you to the same
  * Unlock card via router.push rather than silently adding to a cart nothing
  * else in the app reads.
+ *
+ * `eligible` marks a product whose category the current customer has shown
+ * real interest in but never bought from — the same rule that decides
+ * whether the Unlock card renders once you land on it. Home mixes every
+ * category into its rails like the real app does, so this small sparkle is
+ * the one visual cue for which taps actually open the card, without hiding
+ * or stripping down anything else on the page.
  */
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, eligible = false }) {
   const router = useRouter();
   const discount = product.mrp > product.price;
   const percentOff = discount
@@ -51,6 +58,15 @@ export default function ProductCard({ product }) {
           {discount && (
             <span className="absolute top-0 left-0 rounded-tl-lg rounded-br-lg bg-[#256fef] px-1.5 py-0.5 text-[9px] leading-tight font-bold text-white">
               {percentOff}% OFF
+            </span>
+          )}
+          {eligible && (
+            <span
+              title="You've shown interest in this category but never bought from it"
+              className="absolute top-1 right-1 flex items-center gap-0.5 rounded-full bg-blinkit-green px-1.5 py-0.5 text-[8px] font-bold text-white shadow-sm"
+            >
+              <SparkleIcon />
+              Explore
             </span>
           )}
         </div>
@@ -82,6 +98,21 @@ export default function ProductCard({ product }) {
         </button>
       </div>
     </article>
+  );
+}
+
+function SparkleIcon() {
+  return (
+    <svg
+      width="8"
+      height="8"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className="shrink-0"
+    >
+      <path d="M12 2l2.2 6.5L21 11l-6.8 2.5L12 20l-2.2-6.5L3 11l6.8-2.5z" />
+    </svg>
   );
 }
 

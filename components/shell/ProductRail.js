@@ -5,7 +5,7 @@ import ProductCard from "./ProductCard";
  * Horizontally scrolling product row with a "see all" link — Blinkit's home
  * screen is stacked rails like this, one per category.
  */
-export default function ProductRail({ title, slug, products }) {
+export default function ProductRail({ title, slug, products, eligibleSlugs }) {
   if (products.length === 0) return null;
 
   return (
@@ -23,7 +23,10 @@ export default function ProductRail({ title, slug, products }) {
       <ul className="mt-2 flex gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {products.map((product) => (
           <li key={product.id} className="w-[42vw] max-w-[160px] shrink-0">
-            <ProductCard product={product} />
+            <ProductCard
+              product={product}
+              eligible={eligibleSlugs?.has(product.category) ?? false}
+            />
           </li>
         ))}
       </ul>
