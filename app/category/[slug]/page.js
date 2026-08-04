@@ -69,6 +69,17 @@ export default async function CategoryPage({ params, searchParams }) {
             New for you
           </span>
         )}
+        {/* The flip side of "New for you" — shown only when this customer has
+            actually bought from this category before, never guessed at. A
+            category they've simply never touched gets neither badge; calling
+            that "regular" would be the same kind of invented claim the rest
+            of this feature refuses to make. */}
+        {!isNewCategory && customer.purchased.includes(slug) && (
+          <span className="ml-auto flex items-center gap-1 rounded-full bg-blinkit-yellow/25 px-2 py-0.5 text-[10px] font-semibold text-[#8a6a14]">
+            <CartBadgeIcon />
+            One of your regulars
+          </span>
+        )}
       </header>
 
       <main className="flex-1">
@@ -111,6 +122,27 @@ function BackIcon() {
       aria-hidden="true"
     >
       <path d="M15 18l-6-6 6-6" />
+    </svg>
+  );
+}
+
+function CartBadgeIcon() {
+  return (
+    <svg
+      width="11"
+      height="11"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className="shrink-0"
+    >
+      <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+      <circle cx="17" cy="20" r="1.4" fill="currentColor" stroke="none" />
+      <path d="M2.5 3h2l2.4 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 7H6" />
     </svg>
   );
 }
