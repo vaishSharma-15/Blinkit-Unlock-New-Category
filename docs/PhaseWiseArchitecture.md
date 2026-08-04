@@ -38,10 +38,10 @@ Each phase is independently shippable and independently demoable. Do not start a
       │  sampleCustomers.js  SIMULATED — clearly named │
       └────────────────────────────────────────────────┘
                                 │
-                    ┌───────────▼───────────┐
-                    │  Gemini API           │
-                    │  (gemini-3.6-flash)   │
-                    └───────────────────────┘
+                    ┌────────────▼──────────────┐
+                    │  Gemini API               │
+                    │  (gemini-3.1-flash-lite)  │
+                    └───────────────────────────┘
 ```
 
 **The single most important architectural rule:** real data and simulated data never live in the same file. Product reviews and products are real. Customer engagement history is simulated and must be in a file whose name says so.
@@ -57,7 +57,7 @@ Each phase is independently shippable and independently demoable. Do not start a
 | Framework | Next.js (App Router) |
 | Styling | Tailwind CSS |
 | Hosting | Vercel |
-| AI | Gemini API via `@google/genai`, model `gemini-3.6-flash` (free tier) |
+| AI | Gemini API via `@google/genai`, model `gemini-3.1-flash-lite` (free tier) |
 | Data | Flat JSON files in `/data` — no database needed at this scale |
 
 **Directory shape:**

@@ -119,3 +119,9 @@ Deploys to Vercel with no changes needed. Set `GEMINI_API_KEY` (and
 optionally `GEMINI_MODEL`, if you want to point it at a different model) in
 the project's environment variables. There's no database and nothing else
 to configure.
+
+Defaults to `gemini-3.1-flash-lite`, picked for the highest free-tier daily
+request ceiling of the models a fresh API key can actually reach (the 2.5
+series returns a 404 as "no longer available to new users"). If a demo
+trips "quota reached," `GEMINI_MODEL` is the fastest way past it: point it
+at a different model and redeploy, no code change needed.
